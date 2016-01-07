@@ -11,6 +11,7 @@ Vagrant.configure(2) do |config|
     owncloud.vm.hostname = "owncloud"
 
     owncloud.vm.network :private_network, ip: "192.168.202.201"
+    owncloud.vm.network "forwarded_port", guest: 80, host: 8080
 
     owncloud.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
