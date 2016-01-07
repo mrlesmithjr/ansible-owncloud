@@ -3,6 +3,8 @@
   hosts: all
   sudo: true
   vars:
+    - mysql_root_password: root
   roles:
+    - { role: ansible-mysql }
     - { role: ansible-owncloud }
   tasks:
