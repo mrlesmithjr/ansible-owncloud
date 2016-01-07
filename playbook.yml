@@ -7,7 +7,7 @@
     - mysql_root_password: root
     - pri_domain_name: everythingshouldbevirtual.local
   roles:
-#    - { role: ansible-apt-mirror }
+    - { role: ansible-apt-mirror }
     - { role: ansible-mysql }
     - { role: ansible-owncloud }
   tasks:
