@@ -1,0 +1,8 @@
+---
+- name: provisions owncloud
+  hosts: all
+  sudo: true
+  vars:
+  roles:
+    - { role: ansible-owncloud }
+  tasks:

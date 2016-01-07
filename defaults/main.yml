@@ -1,0 +1,4 @@
+---
+# defaults file for ansible-owncloud
+owncloud_debian_repo: 'deb http://download.owncloud.org/download/repositories/stable/{{ ansible_distribution }}_{{ ansible_distribution_version }}/ /'
+owncloud_debian_repo_key: 'https://download.owncloud.org/download/repositories/stable/{{ ansible_distribution }}_{{ ansible_distribution_version }}/Release.key'

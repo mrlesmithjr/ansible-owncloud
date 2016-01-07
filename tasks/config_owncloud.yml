@@ -1,0 +1,9 @@
+---
+- name: config_owncloud | configuring directory permissions
+  file:
+    dest: "/var/www/owncloud/"
+    owner: www-data
+    group: www-data
+    state: directory
+    recurse: yes
+    
