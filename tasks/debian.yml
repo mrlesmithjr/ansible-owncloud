@@ -3,6 +3,7 @@
   apt_key:
     url: "{{ owncloud_debian_repo_key }}"
     state: present
+    validate_certs: no
 
 - name: debian | adding Owncloud debian repo
   apt_repository:
