@@ -3,4 +3,6 @@
 - include: debian.yml
   when: ansible_os_family == "Debian"
 
+- include: config_db.yml
+
 - include: config_owncloud.yml
