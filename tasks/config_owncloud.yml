@@ -13,7 +13,7 @@
 
 - name: config_owncloud | configuring directory permissions
   file:
-    dest: "/var/www/owncloud/"
+    dest: "{{ owncloud_webroot }}/"
     owner: www-data
     group: www-data
     state: directory
