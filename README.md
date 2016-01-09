@@ -42,8 +42,10 @@ owncloud_webroot: '{{ apache2_webroot }}/owncloud'
 Dependencies
 ------------
 
+````
 ansible-apache2
 ansible-mariadb-mysql
+````
 
 Example Playbook
 ----------------
