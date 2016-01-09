@@ -10,6 +10,7 @@
     src: "/opt/{{ owncloud_dl_file }}"
     dest: "{{ apache2_webroot }}"
     copy: no
+    creates: "{{ owncloud_webroot }}/index.php"
 
 - name: config_owncloud | configuring directory permissions
   file:
@@ -43,7 +44,7 @@
     - restart apache2
 
 - name: config_owncloud | configuring owncloud
-  command: 'sudo -u www-data php occ maintenance:install --database \"mysql\" --database-name \"{{ owncloud_db_name }}\" --database-user \"root\" --database-pass \"{{ mysql_root_password }}\" --admin-user \"{{ owncloud_admin_user }}\" --admin-pass \"{{ owncloud_admin_pass }}\"'
+  command: 'sudo -u www-data php occ maintenance:install --database "mysql" --database-name "{{ owncloud_db_name }}" --database-user "root" --database-pass "{{ mysql_root_password }}" --admin-user "{{ owncloud_admin_user }}" --admin-pass "{{ owncloud_admin_pass }}"'
   args:
     chdir: "{{ owncloud_webroot }}"
     creates: "{{ owncloud_webroot }}/config/config.php"

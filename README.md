@@ -1,31 +1,68 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Installs and configures a ready to use Owncloud deployment (https://owncloud.org)
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Install all Ansible role requirements.
+````
+sudo ansible-galaxy install -r requirements.yml -f
+````
+
+Vagrant
+-------
+Spin up Environment under Vagrant to test.
+````
+vagrant up
+````
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+````
+---
+# defaults file for ansible-owncloud
+apache2_webroot: /var/www/html
+mysql_root_password: root
+owncloud_admin_user: owncloudadmin
+owncloud_admin_pass: owncloudadmin
+owncloud_db_name: owncloud  #define the owncloud db name to create and use
+owncloud_db_password: owncloud  #define the owncloud db password to create and use
+owncloud_db_user: owncloud  #define the owncloud db username to create and use
+owncloud_debian_repo_key: 'https://download.owncloud.org/download/repositories/stable/{{ ansible_distribution }}_{{ ansible_distribution_version }}/Release.key'
+owncloud_debian_repo: 'deb http://download.owncloud.org/download/repositories/stable/{{ ansible_distribution }}_{{ ansible_distribution_version }}/ /'
+owncloud_dl_file: 'owncloud-{{ owncloud_version }}.tar.bz2'
+owncloud_dl_url: https://download.owncloud.org/community
+owncloud_version: 8.2.2
+owncloud_webroot: '{{ apache2_webroot }}/owncloud'
+````
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+ansible-apache2
+ansible-mariadb-mysql
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+````
+---
+- name: provisions owncloud
+  hosts: all
+  sudo: true
+  vars:
+    - apt_mirror_client: false
+    - mysql_root_password: root
+    - pri_domain_name: example.org
+  roles:
+    - role: ansible-apache2
+    - role: ansible-mariadb-mysql
+    - role: ansible-owncloud
+  tasks:
+````
 
 License
 -------
@@ -35,4 +72,7 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Larry Smith Jr.
+- @mrlesmithjr
+- http://everythingshouldbevirtual.com
+- mrlesmithjr [at] gmail.com
