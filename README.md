@@ -18,6 +18,15 @@ Spin up Environment under Vagrant to test.
 vagrant up
 ````
 
+Usage
+-----
+
+###### Non-Vagrant
+Login to WebUI using defined owncloud_admin_user and owncloud_admin_pass vars (http://iporhostname/owncloud)
+
+###### Vagrant
+Login to WebUI using defined owncloud_admin_user and owncloud_admin_pass vars (http://127.0.0.1:8080/owncloud)
+
 Role Variables
 --------------
 
