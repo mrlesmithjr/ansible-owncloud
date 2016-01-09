@@ -41,3 +41,9 @@
     - rewrite
   notify:
     - restart apache2
+
+- name: config_owncloud | configuring owncloud
+  command: 'sudo -u www-data php occ maintenance:install --database \"mysql\" --database-name \"{{ owncloud_db_name }}\" --database-user \"root\" --database-pass \"{{ mysql_root_password }}\" --admin-user \"{{ owncloud_admin_user }}\" --admin-pass \"{{ owncloud_admin_pass }}\"'
+  args:
+    chdir: "{{ owncloud_webroot }}"
+    creates: "{{ owncloud_webroot }}/config/config.php"

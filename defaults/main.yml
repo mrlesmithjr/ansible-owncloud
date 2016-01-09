@@ -1,6 +1,9 @@
 ---
 # defaults file for ansible-owncloud
 apache2_webroot: /var/www/html
+mysql_root_password: root
+owncloud_admin_user: owncloudadmin
+owncloud_admin_pass: owncloudadmin
 owncloud_db_name: owncloud  #define the owncloud db name to create and use
 owncloud_db_password: owncloud  #define the owncloud db password to create and use
 owncloud_db_user: owncloud  #define the owncloud db username to create and use
