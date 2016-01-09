@@ -3,6 +3,7 @@
   get_url:
     url: "{{ owncloud_dl_url }}/{{ owncloud_dl_file }}"
     dest: "/opt/{{ owncloud_dl_file }}"
+    validate_certs: no
 
 - name: config_owncloud | extracting owncloud
   unarchive:
