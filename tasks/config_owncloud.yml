@@ -55,7 +55,7 @@
     regexp: "http://localhost"
     replace: "http://{{ ansible_hostname }}.{{ pri_domain_name }}/owncloud"
 
-- name: config_owncloud | add trusted domain(s)
+- name: config_owncloud | reconfiguring owncloud
   lineinfile:
     dest: "{{ owncloud_webroot }}/config/config.php"
     insertafter: "{{ item.regexp }}"
@@ -65,11 +65,12 @@
       line: "    1 => '{{ ansible_hostname }}',"
     - regexp: "    1 => '{{ ansible_hostname }}',"
       line: "    2 => '{{ ansible_hostname }}.{{ pri_domain_name }}',"
-    - regexp: "  'dbtype' => 'mysql',"
-      line: "    'memcache.local' => '\OC\Memcache\APCu',"
-    - regexp: "    'memcache.local' => '\OC\Memcache\APCu',"
-      line: "      'memcached_servers' => array("
-    - regexp: "      'memcached_servers' => array("
-      line: "           array('localhost', 11211),"
-    - regexp: "           array('localhost', 11211),"
-      line: "     ),"
+## Below is not working
+#    - regexp: "  'dbtype' => 'mysql',"
+#      line: "    'memcache.local' => '\\OC\\Memcache\\APCu',"
+#    - regexp: "    'memcache.local' => '\\OC\\Memcache\\APCu',"
+#      line: "      'memcached_servers' => array("
+#    - regexp: "      'memcached_servers' => array("
+#      line: "           array('localhost', 11211),"
+#    - regexp: "           array('localhost', 11211),"
+#      line: "     ),"
