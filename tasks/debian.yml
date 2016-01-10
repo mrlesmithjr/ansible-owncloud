@@ -20,11 +20,14 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - memcached
     - php5
     - php5-curl
     - php5-gd
     - php5-imagick
     - php5-intl
     - php5-json
+    - php5-ldap
     - php5-mcrypt
+    - php5-memcached
     - php5-mysql
