@@ -53,4 +53,15 @@
   replace:
     dest: "{{ owncloud_webroot }}/config/config.php"
     regexp: "http://localhost"
-    replace: "http://{{ ansible_hostname }}.{{ pri_domain_name }}"
+    replace: "http://{{ ansible_hostname }}.{{ pri_domain_name }}/owncloud"
+
+- name: config_owncloud | add trusted domain(s)
+  lineinfile:
+    dest: "{{ owncloud_webroot }}/config/config.php"
+    insertafter: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - regexp: "^    0 => 'localhost',"
+      line: "    1 => '{{ ansible_hostname }}',"
+    - regexp: "    1 => '{{ ansible_hostname }}',"
+      line: "    2 => '{{ ansible_hostname }}.{{ pri_domain_name }}',"
