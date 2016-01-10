@@ -52,5 +52,5 @@
 - name: config_owncloud | reconfiguring owncloud
   replace:
     dest: "{{ owncloud_webroot }}/config/config.php"
-    regexp: "^'overwrite.cli.url' => 'http://localhost'"
-    replace: "'overwrite.cli.url' => 'http://{{ ansible_hostname }}.{{ pri_domain_name }}',"
+    regexp: "^http{{ ':' }}//localhost"
+    replace: "http{{ ':' }}//{{ ansible_hostname }}.{{ pri_domain_name }}"
