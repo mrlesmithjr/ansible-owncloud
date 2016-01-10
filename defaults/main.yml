@@ -13,3 +13,4 @@ owncloud_dl_file: 'owncloud-{{ owncloud_version }}.tar.bz2'
 owncloud_dl_url: https://download.owncloud.org/community
 owncloud_version: 8.2.2
 owncloud_webroot: '{{ apache2_webroot }}/owncloud'
+pri_domain_name: example.org
