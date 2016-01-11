@@ -72,7 +72,7 @@
 
 - name: config_owncloud | setting up owncloud
   get_url:
-    url: "127.0.0.1/owncloud"
+    url: "http://127.0.0.1/owncloud"
     dest: "/dev/null"
 #  command: "curl -s -k 127.0.0.1/owncloud/ > /dev/null"
   when: not owncloud_configured.stat.exists
