@@ -4,8 +4,10 @@ apache2_webroot: /var/www/html
 mysql_root_password: root
 owncloud_admin_user: owncloudadmin
 owncloud_admin_pass: owncloudadmin
+owncloud_db_host: localhost
 owncloud_db_name: owncloud  #define the owncloud db name to create and use
 owncloud_db_password: owncloud  #define the owncloud db password to create and use
+owncloud_db_tableprefix: 'oc_'
 owncloud_db_user: owncloud  #define the owncloud db username to create and use
 owncloud_debian_repo_key: 'https://download.owncloud.org/download/repositories/stable/{{ ansible_distribution }}_{{ ansible_distribution_version }}/Release.key'
 owncloud_debian_repo: 'deb http://download.owncloud.org/download/repositories/stable/{{ ansible_distribution }}_{{ ansible_distribution_version }}/ /'
