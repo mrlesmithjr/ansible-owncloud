@@ -71,7 +71,6 @@
   when: not owncloud_configured.stat.exists
 
 - name: config_owncloud | setting up owncloud
-  get_url:
   command: "curl -s -k localhost/owncloud/ > /dev/null"
   when: not owncloud_configured.stat.exists
 
