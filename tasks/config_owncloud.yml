@@ -41,32 +41,6 @@
 #    chdir: "{{ owncloud_webroot }}"
 #    creates: "{{ owncloud_webroot }}/config/config.php"
 
-#- name: config_owncloud | reconfiguring owncloud
-#  replace:
-#    dest: "{{ owncloud_webroot }}/config/config.php"
-#    regexp: "http://localhost"
-#    replace: "http://{{ ansible_hostname }}.{{ pri_domain_name }}/owncloud"
-
-#- name: config_owncloud | reconfiguring owncloud
-#  lineinfile:
-#    dest: "{{ owncloud_webroot }}/config/config.php"
-#    insertafter: "{{ item.regexp }}"
-#    line: "{{ item.line }}"
-#  with_items:
-#    - regexp: "^    0 => 'localhost',"
-#      line: "    1 => '{{ ansible_hostname }}',"
-#    - regexp: "    1 => '{{ ansible_hostname }}',"
-#      line: "    2 => '{{ ansible_hostname }}.{{ pri_domain_name }}',"
-## Below is not working
-#    - regexp: "  'dbtype' => 'mysql',"
-#      line: "    'memcache.local' => '\\OC\\Memcache\\APCu',"
-#    - regexp: "    'memcache.local' => '\\OC\\Memcache\\APCu',"
-#      line: "      'memcached_servers' => array("
-#    - regexp: "      'memcached_servers' => array("
-#      line: "           array('localhost', 11211),"
-#    - regexp: "           array('localhost', 11211),"
-#      line: "     ),"
-
 - name: config_owncloud | checking if already configured
   stat:
     path: "{{ owncloud_webroot }}/owncloud_configured"
@@ -95,6 +69,23 @@
     path: "{{ owncloud_webroot }}/owncloud_configured"
     state: touch
   when: not owncloud_configured.stat.exists
+
+#- name: config_owncloud | reconfiguring owncloud
+#  replace:
+#    dest: "{{ owncloud_webroot }}/config/config.php"
+#    regexp: "http://localhost"
+#    replace: "http://{{ ansible_hostname }}.{{ pri_domain_name }}/owncloud"
+
+- name: config_owncloud | reconfiguring owncloud
+  lineinfile:
+    dest: "{{ owncloud_webroot }}/config/config.php"
+    insertafter: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - regexp: "^    0 => 'localhost',"
+      line: "    1 => '{{ ansible_hostname }}',"
+    - regexp: "    1 => '{{ ansible_hostname }}',"
+      line: "    2 => '{{ ansible_hostname }}.{{ pri_domain_name }}',"
 
 - name: config_owncloud | configuring directory permissions
   file:
