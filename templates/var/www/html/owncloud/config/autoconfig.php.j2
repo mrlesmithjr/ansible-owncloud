@@ -2,11 +2,11 @@
 $AUTOCONFIG = array(
   "dbtype"        => "mysql",
   "dbname"        => "{{ owncloud_db_name }}",
-  "dbuser"        => "{{ owncloud_db_user }}",
-  "dbpass"        => "{{ owncloud_db_password }}",
+  "dbuser"        => "root",
+  "dbpass"        => "{{ mysql_root_password }}",
   "dbhost"        => "{{ owncloud_db_host }}",
   "dbtableprefix" => "{{ owncloud_db_tableprefix }}",
-  "adminlogin"    => "root",
-  "adminpass"     => "{{ mysql_root_password }}",
+  "adminlogin"    => "{{ owncloud_admin_user }}",
+  "adminpass"     => "{{ owncloud_admin_pass }}",
   "directory"     => "{{ owncloud_webroot }}/data",
 );

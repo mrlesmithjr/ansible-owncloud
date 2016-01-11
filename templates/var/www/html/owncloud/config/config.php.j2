@@ -6,5 +6,9 @@ $CONFIG = array (
     1 => '{{ ansible_hostname }}',
     2 => '{{ ansible_hostname }}.{{ pri_domain_name }}',
   ),
-  'memcache.local' => '\OC\Memcache\APCu',
+  'memcache.local' => '\OC\Memcache\Memcached',
+  'memcache.distributed' => '\OC\Memcache\Memcached',
+  'memcached_servers' => array(
+     array('localhost', 11211),
+  ),
 );

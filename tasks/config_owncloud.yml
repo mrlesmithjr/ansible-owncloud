@@ -90,6 +90,11 @@
     mode: 0644
   when: not owncloud_configured.stat.exists
 
+- name: config_owncloud | marking configured
+  file:
+    path: "{{ owncloud_webroot }}/owncloud_configured"
+  when: not owncloud_configured.stat.exists
+
 - name: config_owncloud | configuring directory permissions
   file:
     dest: "{{ owncloud_webroot }}/"
