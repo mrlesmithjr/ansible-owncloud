@@ -71,9 +71,12 @@
   when: not owncloud_configured.stat.exists
 
 - name: config_owncloud | setting up owncloud
-  command: "curl -s -k 127.0.0.1/owncloud/ > /dev/null"
+  get_url:
+    url: "127.0.0.1/owncloud"
+    dest: "/dev/null"
+#  command: "curl -s -k 127.0.0.1/owncloud/ > /dev/null"
   when: not owncloud_configured.stat.exists
-  
+
 #- name: config_owncloud | reconfiguring owncloud
 #  replace:
 #    dest: "{{ owncloud_webroot }}/config/config.php"
