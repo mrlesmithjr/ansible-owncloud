@@ -12,6 +12,14 @@
     copy: no
     creates: "{{ owncloud_webroot }}/index.php"
 
+- name: config_owncloud | configuring directory permissions
+  file:
+    dest: "{{ owncloud_webroot }}/"
+    owner: www-data
+    group: www-data
+    state: directory
+    recurse: yes
+
 - name: config_owncloud | creating owncloud Apache2 config
   template:
     src: "etc/apache2/sites-available/owncloud.conf.j2"
@@ -41,39 +49,6 @@
     chdir: "{{ owncloud_webroot }}"
     creates: "{{ owncloud_webroot }}/config/config.php"
 
-#- name: config_owncloud | checking if already configured
-#  stat:
-#    path: "{{ owncloud_webroot }}/owncloud_configured"
-#  register: owncloud_configured
-
-#- name: config_owncloud | configuring autoconfig.php
-#  template:
-#    src: "var/www/html/owncloud/config/autoconfig.php.j2"
-#    dest: "{{ owncloud_webroot }}/config/autoconfig.php"
-#    owner: www-data
-#    group: www-data
-#    mode: 0644
-#  when: not owncloud_configured.stat.exists
-
-#- name: config_owncloud | configuring config.php
-#  template:
-#    src: "var/www/html/owncloud/config/config.php.j2"
-#    dest: "{{ owncloud_webroot }}/config/config.php"
-#    owner: www-data
-#    group: www-data
-#    mode: 0644
-#  when: not owncloud_configured.stat.exists
-
-#- name: config_owncloud | marking configured
-#  file:
-#    path: "{{ owncloud_webroot }}/owncloud_configured"
-#    state: touch
-#  when: not owncloud_configured.stat.exists
-
-#- name: config_owncloud | setting up owncloud
-#  command: "curl -s -k localhost/owncloud/ > /dev/null"
-#  when: not owncloud_configured.stat.exists
-
 - name: config_owncloud | reconfiguring owncloud
   replace:
     dest: "{{ owncloud_webroot }}/config/config.php"
@@ -99,11 +74,3 @@
 #      line: "           array('localhost', 11211),"
 #    - regexp: "           array('localhost', 11211),"
 #      line: "     ),"
-
-- name: config_owncloud | configuring directory permissions
-  file:
-    dest: "{{ owncloud_webroot }}/"
-    owner: www-data
-    group: www-data
-    state: directory
-    recurse: yes
